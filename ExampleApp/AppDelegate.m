@@ -9,13 +9,22 @@
 
 @interface AppDelegate ()
 
-@property (strong) IBOutlet NSWindow *window;
+@property (strong) NSWindow *window;
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
+    NSWindowStyleMask style = NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskMiniaturizable | NSWindowStyleMaskResizable;
+    NSRect frame = NSMakeRect(0, 0, 480, 320);
+    NSWindow *window = [[NSWindow alloc] initWithContentRect:frame
+                                                   styleMask:style
+                                                     backing:NSBackingStoreBuffered
+                                                       defer:NO];
+    window.title = @"Example App";
+    [window center];
+    [window makeKeyAndOrderFront:nil];
+    self.window = window;
 }
 
 
@@ -25,6 +34,10 @@
 
 
 - (BOOL)applicationSupportsSecureRestorableState:(NSApplication *)app {
+    return NO;
+}
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
     return YES;
 }
 
